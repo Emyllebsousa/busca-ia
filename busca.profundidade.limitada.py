@@ -130,7 +130,7 @@ cidadeIasi.adicionarVizinho(cidadeNeamt)
 cidadeNeamt.adicionarVizinho(cidadeIasi)
 
 # Busca em profundidade limitada
-resultado = buscaEmProfundidadeLimitada(cidadeArad, cidadeZerind, 2)
+resultado = buscaEmProfundidadeLimitada(cidadeArad, cidadeZerind, 5)
 
 if resultado is not None:
     print("Caminho encontrado!")
