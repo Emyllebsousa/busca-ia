@@ -25,9 +25,9 @@ def buscaEmProfundidadeLimitada(inicio, objetivo, limiteProfundidade):
 
         if no.nome == objetivo.nome:
             print(f"Encontrou o objetivo: {no.nome}")
-            return
+            return True
 
-        # Verifica se a profundidade atual e maior que o limite
+        # Verifica se a profundidade atual é maior que o limite
         if profundidade >= limiteProfundidade:
             continue
 
@@ -38,7 +38,7 @@ def buscaEmProfundidadeLimitada(inicio, objetivo, limiteProfundidade):
                 pilha.append({'no': cidade_vizinha, 'profundidade': profundidade + 1})
                 visitados.add(cidade_vizinha) # marca o vizinho como visitado
 
-    return None
+    return False
 
 #Grafo
 cidadeArad = Cidade("Arad")
@@ -61,34 +61,33 @@ cidadeEforie = Cidade("Eforie")
 cidadeVaslui = Cidade("Vaslui")
 cidadeIasi = Cidade("Iasi")
 cidadeNeamt = Cidade("Neamt")
-
-# Vizinhos
-cidadeArad.adicionarVizinho(cidadeSibiu)
+# Adicionando os vizinhos
 cidadeArad.adicionarVizinho(cidadeTimisoara)
+cidadeArad.adicionarVizinho(cidadeSibiu)
 cidadeArad.adicionarVizinho(cidadeZerind)
 
 cidadeZerind.adicionarVizinho(cidadeArad)
 cidadeZerind.adicionarVizinho(cidadeOradea)
 
-cidadeOradea.adicionarVizinho(cidadeZerind)
 cidadeOradea.adicionarVizinho(cidadeSibiu)
+cidadeOradea.adicionarVizinho(cidadeZerind)
 
 cidadeSibiu.adicionarVizinho(cidadeArad)
+cidadeSibiu.adicionarVizinho(cidadeRimnicuVilcea)
 cidadeSibiu.adicionarVizinho(cidadeFagaras)
 cidadeSibiu.adicionarVizinho(cidadeOradea)
-cidadeSibiu.adicionarVizinho(cidadeRimnicuVilcea)
 
 cidadeTimisoara.adicionarVizinho(cidadeArad)
 cidadeTimisoara.adicionarVizinho(cidadeLugoj)
 
-cidadeLugoj.adicionarVizinho(cidadeTimisoara)
 cidadeLugoj.adicionarVizinho(cidadeMehadia)
+cidadeLugoj.adicionarVizinho(cidadeTimisoara)
 
-cidadeMehadia.adicionarVizinho(cidadeLugoj)
 cidadeMehadia.adicionarVizinho(cidadeDobreta)
+cidadeMehadia.adicionarVizinho(cidadeLugoj)
 
-cidadeDobreta.adicionarVizinho(cidadeMehadia)
 cidadeDobreta.adicionarVizinho(cidadeCraiova)
+cidadeDobreta.adicionarVizinho(cidadeMehadia)
 
 cidadeCraiova.adicionarVizinho(cidadeDobreta)
 cidadeCraiova.adicionarVizinho(cidadePitesti)
@@ -101,8 +100,8 @@ cidadeRimnicuVilcea.adicionarVizinho(cidadeCraiova)
 cidadeFagaras.adicionarVizinho(cidadeSibiu)
 cidadeFagaras.adicionarVizinho(cidadeBucharest)
 
-cidadePitesti.adicionarVizinho(cidadeRimnicuVilcea)
 cidadePitesti.adicionarVizinho(cidadeCraiova)
+cidadePitesti.adicionarVizinho(cidadeRimnicuVilcea)
 cidadePitesti.adicionarVizinho(cidadeBucharest)
 
 cidadeBucharest.adicionarVizinho(cidadeFagaras)
@@ -132,7 +131,7 @@ cidadeNeamt.adicionarVizinho(cidadeIasi)
 # Busca em profundidade limitada
 resultado = buscaEmProfundidadeLimitada(cidadeArad, cidadeZerind, 5)
 
-if resultado is not None:
+if resultado:
     print("Caminho encontrado!")
 else:
     print("Caminho não encontrado!")
